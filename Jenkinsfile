@@ -13,7 +13,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:22.19-alpine3.22'
-                    args '-u root:root' // Use a non-root user
+                    args '-u node:node' // Use a non-root user
                     reuseNode true
                 }
             }
@@ -25,8 +25,16 @@ pipeline {
                     npm install || { echo "npm install failed"; exit 1; }
                     npm run build || { echo "npm run build failed"; exit 1; }
                 '''
-                }
-                
             }
+
+            post {
+                success {
+                    // Archive build artifacts (adjust path as per your project)
+                    archiveArtifacts artifacts: 'dist/**', fingerprint: true
+                }
+            }
+            
+                
         }
+    }
 }
