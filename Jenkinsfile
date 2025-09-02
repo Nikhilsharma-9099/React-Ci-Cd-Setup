@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:22.11.0-alpine3.20'
+                    image 'node:22-alpine3.21'
                     args '-u node' // Use a non-root user
                     reuseNode true
                 }
