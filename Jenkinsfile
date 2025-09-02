@@ -12,12 +12,9 @@ pipeline {
 
             steps {
 
-                step  {
-                    cleanWs()
-                }
+                cleanWs()
 
-                step {
-                    sh '''
+                sh '''
                     npm --version
                     node --version
                     npm install || { echo "npm install failed"; exit 1; }
@@ -27,5 +24,4 @@ pipeline {
                 
             }
         }
-    }
 }
