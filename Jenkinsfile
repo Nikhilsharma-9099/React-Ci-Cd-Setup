@@ -5,19 +5,17 @@ pipeline {
             agent {
                 docker {
                     image 'node:22.11.0-alpine3.20'
-                    args '-u root'
+                    args '-u node' // Use a non-root user
                     reuseNode true
                 }
             }
 
             steps {
                 sh '''
-                    ls -l
-                    node --version
                     npm --version
-                    npm install
-                    npm run build
-                    ls -l 
+                    node --version
+                    npm install || { echo "npm install failed"; exit 1; }
+                    npm run build || { echo "npm run build failed"; exit 1; }
                 '''
             }
         }
