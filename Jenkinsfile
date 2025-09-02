@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/Nikhilsharma-9099/React-Ci-Cd-Setup.git'
+            }
+        }
+
         
         stage('Build') {
             agent {
