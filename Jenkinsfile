@@ -4,19 +4,27 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:22-alpine3.21'
+                    image 'node:22.19-alpine3.22'
                     args '-u node' // Use a non-root user
                     reuseNode true
                 }
             }
 
             steps {
-                sh '''
+
+                step ('cleanup workspace') {
+                    cleanWs()
+                }
+
+                step('Build Project') {
+                    sh '''
                     npm --version
                     node --version
                     npm install || { echo "npm install failed"; exit 1; }
                     npm run build || { echo "npm run build failed"; exit 1; }
                 '''
+                }
+                
             }
         }
     }
