@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options{
+        skipDefaultCheckout(true)
+    }
     stages {
 
         stage('Clean up Ws'){
@@ -8,9 +11,9 @@ pipeline {
             }
         }
 
-        stage('Checkout') {
+        stage('Checkout using SCM') {
             steps {
-                git 'https://github.com/Nikhilsharma-9099/React-Ci-Cd-Setup.git'
+                checkout scm
             }
         }
 
@@ -19,6 +22,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:22.19-alpine3.22' 
+                    args '-u root'
                     reuseNode true
                 }
             }
