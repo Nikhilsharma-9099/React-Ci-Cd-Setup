@@ -76,7 +76,7 @@ pipeline {
             steps {
                 sh '''
                     npm install vercel -g
-                    echo $MY_VAR
+                    echo $NODE_ENV
                     vercel --prod --token=$VERCEL_TOKEN --confirm --name=cicdproject
                 '''
             }            
