@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        MY_VAR = 'my value'
+    }
+
     options{
         skipDefaultCheckout(true)
     }
@@ -53,6 +58,24 @@ pipeline {
                 sh '''
                     npm run test
                     test -f dist/index.html
+                '''
+            }            
+                
+        }
+
+        stage('Deploy') {
+            agent {
+                docker {
+                    image 'node:22.19-alpine3.22' 
+                    args '-u root'
+                    reuseNode true
+                }
+            }
+
+            steps {
+                sh '''
+                    npm install vercel -g
+                    echo $MY_VAR
                 '''
             }            
                 
