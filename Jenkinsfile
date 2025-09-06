@@ -39,7 +39,7 @@ pipeline {
                     ls -l
                     npm --version
                     node --version
-                    npm install 
+                    npm install --include=dev
                     npm run build 
                     ls -l
                 '''
