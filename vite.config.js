@@ -8,6 +8,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/setupTests.js', 
+    setupFiles: './src/setupTests.js',
+    deps: {
+    inline: ["react", "react-dom"], // force dev build for tests
+    }, 
   },
 })

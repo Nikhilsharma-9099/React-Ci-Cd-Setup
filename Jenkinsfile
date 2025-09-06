@@ -56,6 +56,10 @@ pipeline {
                 }
             }
 
+            environment {
+                NODE_ENV = 'test'
+            }
+
             steps {
                 sh '''
                     npm run test
