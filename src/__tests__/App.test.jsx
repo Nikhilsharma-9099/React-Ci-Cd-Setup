@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { act } from "react";
+import { act } from "react-dom/test-utils";
 import App from '../App';
 
 test('renders Vite + React text', () =>{
